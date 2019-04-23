@@ -1,0 +1,23 @@
+PODS:
+  - Loading (1.0.0)
+  - SnapKit (4.2.0)
+
+DEPENDENCIES:
+  - Loading (from `../`)
+  - SnapKit (~> 4.2.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - SnapKit
+
+EXTERNAL SOURCES:
+  Loading:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Loading: 5a4b54b4a79bd5032265641d704b2d2e7d24670a
+  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
+
+PODFILE CHECKSUM: 13e26f1e8106d107f7ad1857ab39dbb12cdd728c
+
+COCOAPODS: 1.6.1

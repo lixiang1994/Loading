@@ -1,0 +1,10 @@
+platform :ios, '9.0'
+inhibit_all_warnings!
+
+target 'Demo' do
+  use_frameworks!
+  
+  pod 'Loading', :path => "../"
+  pod 'SnapKit', '~>4.2.0'
+  
+end
