@@ -13,8 +13,6 @@
 
 import UIKit
 
-extension UIButton: LoadingCompatible { }
-
 private var tempKey: Void?
 
 public extension LoadingWrapper where Base: UIButton {
