@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
 
 s.name         = "Loading"
 s.version      = "1.0.0"
-s.summary      = "加载视图组件"
+s.summary      = "An elegant loading view written in swift"
 
 s.homepage     = "https://github.com/lixiang1994/Loading"
 
