@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		79972BF51E407AD7AF2C4CED /* Pods_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF57B41D73F13E626AD52CC2 /* Pods_Demo.framework */; };
+		C92DBF6822702D5F0054DF7C /* LoadingLottieIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92DBF6722702D5F0054DF7C /* LoadingLottieIndicator.swift */; };
+		C92DBF6A227040F00054DF7C /* PinJump.json in Resources */ = {isa = PBXBuildFile; fileRef = C92DBF69227040F00054DF7C /* PinJump.json */; };
 		C94ABFAC226F442B0078B745 /* loading05@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C94ABF9C226F442A0078B745 /* loading05@2x.png */; };
 		C94ABFAD226F442B0078B745 /* loading00@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C94ABF9D226F442A0078B745 /* loading00@2x.png */; };
 		C94ABFAE226F442B0078B745 /* loading12@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C94ABF9E226F442A0078B745 /* loading12@2x.png */; };
@@ -32,12 +34,14 @@
 		C9B24993226DF1A40036083B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9B24991226DF1A40036083B /* Main.storyboard */; };
 		C9B24995226DF1A50036083B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9B24994226DF1A50036083B /* Assets.xcassets */; };
 		C9B24998226DF1A50036083B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9B24996226DF1A50036083B /* LaunchScreen.storyboard */; };
-		C9B249A0226EF2620036083B /* ButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B2499F226EF2620036083B /* ButtonViewController.swift */; };
+		C9B249A0226EF2620036083B /* ExtensionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B2499F226EF2620036083B /* ExtensionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		99311A51BC668B9DD4DD9CC1 /* Pods-Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo.release.xcconfig"; path = "Target Support Files/Pods-Demo/Pods-Demo.release.xcconfig"; sourceTree = "<group>"; };
 		B8E5CFA4BE42DC12ECBD7CBF /* Pods-Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo.debug.xcconfig"; path = "Target Support Files/Pods-Demo/Pods-Demo.debug.xcconfig"; sourceTree = "<group>"; };
+		C92DBF6722702D5F0054DF7C /* LoadingLottieIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingLottieIndicator.swift; sourceTree = "<group>"; };
+		C92DBF69227040F00054DF7C /* PinJump.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PinJump.json; sourceTree = "<group>"; };
 		C94ABF9C226F442A0078B745 /* loading05@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loading05@2x.png"; sourceTree = "<group>"; };
 		C94ABF9D226F442A0078B745 /* loading00@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loading00@2x.png"; sourceTree = "<group>"; };
 		C94ABF9E226F442A0078B745 /* loading12@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loading12@2x.png"; sourceTree = "<group>"; };
@@ -64,7 +68,7 @@
 		C9B24994226DF1A50036083B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C9B24997226DF1A50036083B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C9B24999226DF1A50036083B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C9B2499F226EF2620036083B /* ButtonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonViewController.swift; sourceTree = "<group>"; };
+		C9B2499F226EF2620036083B /* ExtensionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionViewController.swift; sourceTree = "<group>"; };
 		CF57B41D73F13E626AD52CC2 /* Pods_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -97,9 +101,18 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		C92DBF6622702D320054DF7C /* Lottie */ = {
+			isa = PBXGroup;
+			children = (
+				C92DBF6722702D5F0054DF7C /* LoadingLottieIndicator.swift */,
+			);
+			path = Lottie;
+			sourceTree = "<group>";
+		};
 		C94ABF9B226F441A0078B745 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				C92DBF69227040F00054DF7C /* PinJump.json */,
 				C94ABFC1226F56490078B745 /* miao.gif */,
 				C94ABF9D226F442A0078B745 /* loading00@2x.png */,
 				C94ABF9F226F442A0078B745 /* loading01@2x.png */,
@@ -151,11 +164,12 @@
 		C9B2498C226DF1A40036083B /* Demo */ = {
 			isa = PBXGroup;
 			children = (
+				C92DBF6622702D320054DF7C /* Lottie */,
 				C94ABFBC226F4C410078B745 /* Custom */,
 				C94ABF9B226F441A0078B745 /* Resource */,
 				C9B2498D226DF1A40036083B /* AppDelegate.swift */,
 				C9B2498F226DF1A40036083B /* ViewController.swift */,
-				C9B2499F226EF2620036083B /* ButtonViewController.swift */,
+				C9B2499F226EF2620036083B /* ExtensionViewController.swift */,
 				C9B24991226DF1A40036083B /* Main.storyboard */,
 				C9B24994226DF1A50036083B /* Assets.xcassets */,
 				C9B24996226DF1A50036083B /* LaunchScreen.storyboard */,
@@ -238,6 +252,7 @@
 				C94ABFB6226F442B0078B745 /* loading08@2x.png in Resources */,
 				C94ABFAC226F442B0078B745 /* loading05@2x.png in Resources */,
 				C94ABFB8226F442B0078B745 /* loading09@2x.png in Resources */,
+				C92DBF6A227040F00054DF7C /* PinJump.json in Resources */,
 				C94ABFB1226F442B0078B745 /* loading07@2x.png in Resources */,
 				C94ABFB3226F442B0078B745 /* loading14@2x.png in Resources */,
 				C94ABFB2226F442B0078B745 /* loading10@2x.png in Resources */,
@@ -283,6 +298,7 @@
 				"${PODS_ROOT}/Target Support Files/Pods-Demo/Pods-Demo-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Loading/Loading.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -290,6 +306,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Loading.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -306,7 +323,8 @@
 				C94ABFC0226F4C8A0078B745 /* LoadingCustomIndicator.swift in Sources */,
 				C9B24990226DF1A40036083B /* ViewController.swift in Sources */,
 				C94ABFBE226F4C6E0078B745 /* LoadingCustomReloader.swift in Sources */,
-				C9B249A0226EF2620036083B /* ButtonViewController.swift in Sources */,
+				C92DBF6822702D5F0054DF7C /* LoadingLottieIndicator.swift in Sources */,
+				C9B249A0226EF2620036083B /* ExtensionViewController.swift in Sources */,
 				C9B2498E226DF1A40036083B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

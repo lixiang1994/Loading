@@ -47,8 +47,9 @@ public extension LoadingWrapper where Base: UIButton {
         stop(tag)
         
         base.layoutIfNeeded()
+        base.isUserInteractionEnabled = false
         
-        let maskView = UIImageView(frame: base.bounds)
+        let maskView = UIImageView()
         maskView.tag = tag
         
         // 获取UIButton所有状态内容
@@ -90,7 +91,10 @@ public extension LoadingWrapper where Base: UIButton {
         maskView.image = base.currentBackgroundImage
         maskView.backgroundColor = base.backgroundColor
         
-        view.frame = maskView.bounds
+        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        maskView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.frame = base.bounds
+        maskView.frame = base.bounds
         maskView.addSubview(view)
         base.addSubview(maskView)
         base.bringSubviewToFront(maskView)
@@ -99,6 +103,9 @@ public extension LoadingWrapper where Base: UIButton {
     }
     
     func stop(_ tag: Int = 1994) {
+        defer {
+            base.isUserInteractionEnabled = true
+        }
         // 移除遮罩视图
         guard let view = base.viewWithTag(tag) else {
             return

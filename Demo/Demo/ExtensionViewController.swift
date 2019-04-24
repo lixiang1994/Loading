@@ -1,5 +1,5 @@
 //
-//  ButtonViewController.swift
+//  ExtensionViewController.swift
 //  Demo
 //
 //  Created by 李响 on 2019/4/23.
@@ -7,40 +7,60 @@
 //
 
 import UIKit
+import Loading
 
-class ButtonViewController: UIViewController {
+class ExtensionViewController: UIViewController {
 
     private var workItem: DispatchWorkItem?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        // Do any additional setup after loading the view.
     }
     
-
     @IBAction func buttonAction(_ sender: UIButton) {
-    
-        sender.loading.start(.system(.gray))
-        
         workItem?.perform()
+        workItem?.cancel()
         let item = DispatchWorkItem {
             sender.loading.stop()
         }
         workItem = item
         DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: item)
+        
+        switch sender.tag {
+        case 0, 2, 3:
+            sender.loading.start(.system(.gray))
+        
+        default:
+            sender.loading.start(.system(.white))
+        }
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    @IBAction func tapAction(_ sender: UITapGestureRecognizer) {
+        guard let view = sender.view else {
+            return
+        }
+        
+        let temp = view.loading.start(.rotate(#imageLiteral(resourceName: "loading"), size: 30))
+        let reloader = temp.reloader as? LoadingButtonReloader
+        reloader?.button.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
+        reloader?.button.titleLabel?.font = .systemFont(ofSize: 13)
+        
+        // 模拟流程
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+            //view.bounds = CGRect(x: 0, y: 0, width: 300, height: 300)
+            // 失败
+            view.loading.fail {
+                // 重新加载
+                view.loading.start(.rotate(#imageLiteral(resourceName: "loading"), size: 30))
+                
+                // 模拟流程
+                DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+                    view.loading.stop()
+                }
+            }
+        }
     }
-    */
-
 }
 
 extension UIView {

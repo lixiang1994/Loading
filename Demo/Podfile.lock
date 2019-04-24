@@ -1,13 +1,16 @@
 PODS:
   - Loading (1.0.0)
+  - lottie-ios (3.0.4)
   - SnapKit (4.2.0)
 
 DEPENDENCIES:
   - Loading (from `../`)
+  - lottie-ios
   - SnapKit (~> 4.2.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - lottie-ios
     - SnapKit
 
 EXTERNAL SOURCES:
@@ -16,8 +19,9 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Loading: 5a4b54b4a79bd5032265641d704b2d2e7d24670a
+  lottie-ios: 55a2de40418f8de2b155efaba4d4d1a025a5c570
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
 
-PODFILE CHECKSUM: 13e26f1e8106d107f7ad1857ab39dbb12cdd728c
+PODFILE CHECKSUM: edcaf5367f9cf83a7bc40b01e9292b0c3e1cf380
 
 COCOAPODS: 1.6.1

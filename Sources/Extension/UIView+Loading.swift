@@ -36,14 +36,19 @@ extension UIView: LoadingCompatible { }
 
 public extension LoadingWrapper where Base: UIView {
     
-    func start(_ type: Loading.Indicator, tag: Int = 1994) {
-        start(Loading.view(type), tag: tag)
+    @discardableResult
+    func start(_ type: Loading.Indicator, tag: Int = 1994) -> LoadingView {
+        let view = Loading.view(type)
+        start(view, tag: tag)
+        return view
     }
     
     func start(_ view: LoadingView, tag: Int = 1994) {
         stop(tag)
         
+        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.frame = base.bounds
+        view.tag = tag
         base.addSubview(view)
         base.bringSubviewToFront(view)
         base.layoutIfNeeded()
@@ -51,13 +56,16 @@ public extension LoadingWrapper where Base: UIView {
         view.start()
     }
     
-    func fail(_ tag: Int = 1994, reload handle: @escaping ()->Void) {
+    func fail(_ tag: Int = 1994, reload handle: (()->Void)? = .none) {
         guard let view = base.viewWithTag(tag) as? LoadingView else {
             return
         }
         
         base.bringSubviewToFront(view)
-        view.reloader.action(handle)
+        
+        if let handle = handle {
+            view.reloader.action(handle)
+        }
         view.fail()
     }
     
