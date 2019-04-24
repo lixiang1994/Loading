@@ -1,9 +1,14 @@
 //
 //  LoadingRotateIndicator.swift
-//  Loading
+//  ┌─┐      ┌───────┐ ┌───────┐
+//  │ │      │ ┌─────┘ │ ┌─────┘
+//  │ │      │ └─────┐ │ └─────┐
+//  │ │      │ ┌─────┘ │ ┌─────┘
+//  │ └─────┐│ └─────┐ │ └─────┐
+//  └───────┘└───────┘ └───────┘
 //
-//  Created by 李响 on 2019/4/22.
-//  Copyright © 2019 swift. All rights reserved.
+//  Created by lee on 2019/4/22.
+//  Copyright © 2019年 lee. All rights reserved.
 //
 
 import UIKit

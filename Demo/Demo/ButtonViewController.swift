@@ -24,7 +24,7 @@ class ButtonViewController: UIViewController {
     
         sender.loading.start(.system(.gray))
         
-        workItem?.cancel()
+        workItem?.perform()
         let item = DispatchWorkItem {
             sender.loading.stop()
         }
