@@ -5,7 +5,7 @@ PODS:
 
 DEPENDENCIES:
   - Loading (from `../`)
-  - lottie-ios
+  - lottie-ios (~> 3.0.4)
   - SnapKit (~> 4.2.0)
 
 SPEC REPOS:
@@ -18,7 +18,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Loading: 5a4b54b4a79bd5032265641d704b2d2e7d24670a
+  Loading: 3b51d1de8a402719ed23c7810f9b1eb1078d64ae
   lottie-ios: 55a2de40418f8de2b155efaba4d4d1a025a5c570
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
 
