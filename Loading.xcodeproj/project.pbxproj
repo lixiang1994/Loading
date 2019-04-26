@@ -18,7 +18,7 @@
 		C9B2496F226DC8580036083B /* LoadingSystemIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B2496E226DC8580036083B /* LoadingSystemIndicator.swift */; };
 		C9B24971226DC91B0036083B /* LoadingRotateIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B24970226DC91B0036083B /* LoadingRotateIndicator.swift */; };
 		C9B24973226DCD9F0036083B /* LoadingCircleIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B24972226DCD9F0036083B /* LoadingCircleIndicator.swift */; };
-		C9B24975226DCF140036083B /* LoadingContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B24974226DCF140036083B /* LoadingContainerView.swift */; };
+		C9B24975226DCF140036083B /* LoadingDefaultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B24974226DCF140036083B /* LoadingDefaultView.swift */; };
 		C9B24977226DD8D10036083B /* LoadingImagesIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B24976226DD8D10036083B /* LoadingImagesIndicator.swift */; };
 		C9B2497C226DED090036083B /* LoadingButtonReloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B2497B226DED090036083B /* LoadingButtonReloader.swift */; };
 		C9B24980226DF07B0036083B /* UIView+Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B2497F226DF07B0036083B /* UIView+Loading.swift */; };
@@ -38,7 +38,7 @@
 		C9B2496E226DC8580036083B /* LoadingSystemIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingSystemIndicator.swift; sourceTree = "<group>"; };
 		C9B24970226DC91B0036083B /* LoadingRotateIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingRotateIndicator.swift; sourceTree = "<group>"; };
 		C9B24972226DCD9F0036083B /* LoadingCircleIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCircleIndicator.swift; sourceTree = "<group>"; };
-		C9B24974226DCF140036083B /* LoadingContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingContainerView.swift; sourceTree = "<group>"; };
+		C9B24974226DCF140036083B /* LoadingDefaultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingDefaultView.swift; sourceTree = "<group>"; };
 		C9B24976226DD8D10036083B /* LoadingImagesIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingImagesIndicator.swift; sourceTree = "<group>"; };
 		C9B2497B226DED090036083B /* LoadingButtonReloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingButtonReloader.swift; sourceTree = "<group>"; };
 		C9B2497F226DF07B0036083B /* UIView+Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Loading.swift"; sourceTree = "<group>"; };
@@ -90,7 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				C9170B6D2272E92200052A4E /* LoadingView.swift */,
-				C9B24974226DCF140036083B /* LoadingContainerView.swift */,
+				C9B24974226DCF140036083B /* LoadingDefaultView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -217,7 +217,7 @@
 				C9B24971226DC91B0036083B /* LoadingRotateIndicator.swift in Sources */,
 				C9170B7B22732D9900052A4E /* LoadingSimpleReloader.swift in Sources */,
 				C9B2496C226DC4E20036083B /* Loading.swift in Sources */,
-				C9B24975226DCF140036083B /* LoadingContainerView.swift in Sources */,
+				C9B24975226DCF140036083B /* LoadingDefaultView.swift in Sources */,
 				C94ABF9A226F3B140078B745 /* UIButton+Loading.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

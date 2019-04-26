@@ -73,8 +73,8 @@ extension LoadingIndicator {
 extension LoadingReloader {
     
     public static func text(_ string: String,
-                            _ font: UIFont = .systemFont(ofSize: 17),
-                            _ color: UIColor = .black,
+                            font: UIFont = .systemFont(ofSize: 17),
+                            color: UIColor = .black,
                             at size: Size = CGSize(width: 200, height: 80)) -> LoadingReloader {
         let temp = LoadingButtonReloader(size.size)
         temp.button.setTitle(string, for: .normal)

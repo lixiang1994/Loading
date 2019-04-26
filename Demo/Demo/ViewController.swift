@@ -120,11 +120,12 @@ extension ViewController: UITableViewDataSource {
             simulation(loadingView)
             
         case 1:
-            let loadingView = Loading.view(.rotate(#imageLiteral(resourceName: "loading"), at: 50))
+            let loadingView = Loading.view(
+                .rotate(#imageLiteral(resourceName: "loading"), at: 50),
+                .text("点击重试", color: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0))
+            )
             loadingView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.4460616438)
             view.addSubview(loadingView)
-            let reloader = loadingView.reloader as? LoadingButtonReloader
-            reloader?.button.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
             
             // SnapKit
             loadingView.snp.makeConstraints { (make) in
@@ -137,11 +138,12 @@ extension ViewController: UITableViewDataSource {
             
         case 2:
             let duration: TimeInterval = 1.0
-            let loadingView = Loading.view(.circle(line: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), line: 4, duration, at: 50))
+            let loadingView = Loading.view(
+                .circle(line: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), line: 4, duration, at: 50),
+                .text("点击重试", color: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0))
+            )
             loadingView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.4460616438)
             view.addSubview(loadingView)
-            let reloader = loadingView.reloader as? LoadingButtonReloader
-            reloader?.button.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
             
             // Frame
             loadingView.frame = view.bounds

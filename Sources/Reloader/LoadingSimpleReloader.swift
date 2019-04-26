@@ -13,7 +13,7 @@
 
 import UIKit
 
-public class LoadingSimpleReloader: LoadingReloader {
+class LoadingSimpleReloader: LoadingReloader {
     
     private var reload: (()->Void)?
     
@@ -31,12 +31,12 @@ public class LoadingSimpleReloader: LoadingReloader {
         super.init(coder: aDecoder)
     }
     
-    public override func layoutSubviews() {
+    override func layoutSubviews() {
         super.layoutSubviews()
         subviews.forEach { $0.frame = bounds }
     }
     
-    public override func action(_ handle: @escaping (() -> Void)) {
+    override func action(_ handle: @escaping (() -> Void)) {
         reload = handle
     }
     
