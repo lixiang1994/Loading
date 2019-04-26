@@ -13,29 +13,20 @@
 
 import UIKit
 
-public class LoadingImagesIndicator: UIView {
+public class LoadingImagesIndicator: LoadingIndicator {
 
     private lazy var view: UIImageView = {
         $0.backgroundColor = .clear
         return $0
     } ( UIImageView() )
     
-    public var offset: CGPoint = .zero {
-        didSet { superview?.layoutSubviews() }
-    }
-    
-    required public init(_ size: CGSize, offset: CGPoint = .zero) {
-        super.init(frame: CGRect(origin: .zero, size: size))
-        self.offset = offset
+    public required init(_ size: Size, offset: CGPoint = .zero) {
+        super.init(size, offset: offset)
         setup()
     }
     
-    override init(frame: CGRect) {
-        fatalError("init(_ size: CGSize, offset: CGPoint)")
-    }
-    
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(_ size: CGSize, offset: CGPoint)")
+        super.init(coder: aDecoder)
     }
     
     private func setup() {
@@ -44,9 +35,17 @@ public class LoadingImagesIndicator: UIView {
         addSubview(view)
     }
     
-    override public func layoutSubviews() {
+    public override func layoutSubviews() {
         super.layoutSubviews()
         view.frame = bounds
+    }
+    
+    public override func start() {
+        view.startAnimating()
+    }
+    
+    public override func stop() {
+        view.stopAnimating()
     }
 }
 
@@ -71,16 +70,5 @@ extension LoadingImagesIndicator {
     /// - Parameter count: 次数
     func set(repeat count: Int) {
         view.animationRepeatCount = count
-    }
-}
-
-extension LoadingImagesIndicator: LoadingIndicatorable {
-    
-    public func start() {
-        view.startAnimating()
-    }
-    
-    public func stop() {
-        view.stopAnimating()
     }
 }

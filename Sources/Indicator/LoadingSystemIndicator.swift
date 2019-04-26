@@ -13,7 +13,7 @@
 
 import UIKit
 
-class LoadingSystemIndicator: UIView {
+class LoadingSystemIndicator: LoadingIndicator {
     
     private lazy var indicator: UIActivityIndicatorView = {
         $0.style = .gray
@@ -21,22 +21,13 @@ class LoadingSystemIndicator: UIView {
         return $0
     } ( UIActivityIndicatorView() )
     
-    public var offset: CGPoint = .zero {
-        didSet { superview?.layoutSubviews() }
-    }
-    
-    required public init(_ size: CGSize, offset: CGPoint = .zero) {
-        super.init(frame: CGRect(origin: .zero, size: size))
-        self.offset = offset
+    required init(_ size: Size, offset: CGPoint = .zero) {
+        super.init(size, offset: offset)
         setup()
     }
     
-    override init(frame: CGRect) {
-        fatalError("init(_ size: CGSize, offset: CGPoint)")
-    }
-    
     required init?(coder aDecoder: NSCoder) {
-       fatalError("init(_ size: CGSize, offset: CGPoint)")
+        super.init(coder: aDecoder)
     }
     
     private func setup() {
@@ -49,6 +40,14 @@ class LoadingSystemIndicator: UIView {
         super.layoutSubviews()
         indicator.frame = bounds
     }
+    
+    public override func start() {
+        indicator.startAnimating()
+    }
+    
+    public override func stop() {
+        indicator.stopAnimating()
+    }
 }
 
 extension LoadingSystemIndicator {
@@ -57,15 +56,3 @@ extension LoadingSystemIndicator {
         indicator.style = style
     }
 }
-
-extension LoadingSystemIndicator: LoadingIndicatorable {
-    
-    func start() {
-        indicator.startAnimating()
-    }
-    
-    func stop() {
-        indicator.stopAnimating()
-    }
-}
-

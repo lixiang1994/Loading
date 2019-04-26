@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C9170B6E2272E92200052A4E /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9170B6D2272E92200052A4E /* LoadingView.swift */; };
+		C9170B702272E94E00052A4E /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9170B6F2272E94E00052A4E /* LoadingIndicator.swift */; };
+		C9170B742272F1E700052A4E /* LoadingReloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9170B732272F1E700052A4E /* LoadingReloader.swift */; };
+		C9170B762272F3FF00052A4E /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9170B752272F3FF00052A4E /* Protocol.swift */; };
+		C9170B7B22732D9900052A4E /* LoadingSimpleReloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9170B7A22732D9900052A4E /* LoadingSimpleReloader.swift */; };
 		C94ABF9A226F3B140078B745 /* UIButton+Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94ABF99226F3B140078B745 /* UIButton+Loading.swift */; };
 		C9B24965226DC4A90036083B /* Loading.h in Headers */ = {isa = PBXBuildFile; fileRef = C9B24963226DC4A90036083B /* Loading.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9B2496C226DC4E20036083B /* Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B2496B226DC4E20036083B /* Loading.swift */; };
@@ -20,6 +25,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C9170B6D2272E92200052A4E /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		C9170B6F2272E94E00052A4E /* LoadingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
+		C9170B732272F1E700052A4E /* LoadingReloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingReloader.swift; sourceTree = "<group>"; };
+		C9170B752272F3FF00052A4E /* Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocol.swift; sourceTree = "<group>"; };
+		C9170B7A22732D9900052A4E /* LoadingSimpleReloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingSimpleReloader.swift; sourceTree = "<group>"; };
 		C94ABF99226F3B140078B745 /* UIButton+Loading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Loading.swift"; sourceTree = "<group>"; };
 		C9B24960226DC4A90036083B /* Loading.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Loading.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9B24963226DC4A90036083B /* Loading.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Loading.h; sourceTree = "<group>"; };
@@ -71,6 +81,7 @@
 				C9B24963226DC4A90036083B /* Loading.h */,
 				C9B24964226DC4A90036083B /* Info.plist */,
 				C9B2496B226DC4E20036083B /* Loading.swift */,
+				C9170B752272F3FF00052A4E /* Protocol.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -78,6 +89,7 @@
 		C9B2496D226DC8340036083B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C9170B6D2272E92200052A4E /* LoadingView.swift */,
 				C9B24974226DCF140036083B /* LoadingContainerView.swift */,
 			);
 			path = View;
@@ -86,6 +98,7 @@
 		C9B2497A226DE34F0036083B /* Indicator */ = {
 			isa = PBXGroup;
 			children = (
+				C9170B6F2272E94E00052A4E /* LoadingIndicator.swift */,
 				C9B2496E226DC8580036083B /* LoadingSystemIndicator.swift */,
 				C9B24970226DC91B0036083B /* LoadingRotateIndicator.swift */,
 				C9B24972226DCD9F0036083B /* LoadingCircleIndicator.swift */,
@@ -97,7 +110,9 @@
 		C9B2497D226DF04C0036083B /* Reloader */ = {
 			isa = PBXGroup;
 			children = (
+				C9170B732272F1E700052A4E /* LoadingReloader.swift */,
 				C9B2497B226DED090036083B /* LoadingButtonReloader.swift */,
+				C9170B7A22732D9900052A4E /* LoadingSimpleReloader.swift */,
 			);
 			path = Reloader;
 			sourceTree = "<group>";
@@ -190,12 +205,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9170B702272E94E00052A4E /* LoadingIndicator.swift in Sources */,
+				C9170B762272F3FF00052A4E /* Protocol.swift in Sources */,
 				C9B2497C226DED090036083B /* LoadingButtonReloader.swift in Sources */,
 				C9B24980226DF07B0036083B /* UIView+Loading.swift in Sources */,
 				C9B2496F226DC8580036083B /* LoadingSystemIndicator.swift in Sources */,
+				C9170B742272F1E700052A4E /* LoadingReloader.swift in Sources */,
+				C9170B6E2272E92200052A4E /* LoadingView.swift in Sources */,
 				C9B24977226DD8D10036083B /* LoadingImagesIndicator.swift in Sources */,
 				C9B24973226DCD9F0036083B /* LoadingCircleIndicator.swift in Sources */,
 				C9B24971226DC91B0036083B /* LoadingRotateIndicator.swift in Sources */,
+				C9170B7B22732D9900052A4E /* LoadingSimpleReloader.swift in Sources */,
 				C9B2496C226DC4E20036083B /* Loading.swift in Sources */,
 				C9B24975226DCF140036083B /* LoadingContainerView.swift in Sources */,
 				C94ABF9A226F3B140078B745 /* UIButton+Loading.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  LoadingButtonReloader.swift
+//  LoadingSimpleReloader.swift
 //  ┌─┐      ┌───────┐ ┌───────┐
 //  │ │      │ ┌─────┘ │ ┌─────┘
 //  │ │      │ └─────┐ │ └─────┐
@@ -7,25 +7,24 @@
 //  │ └─────┐│ └─────┐ │ └─────┐
 //  └───────┘└───────┘ └───────┘
 //
-//  Created by lee on 2019/4/22.
+//  Created by lee on 2019/4/26.
 //  Copyright © 2019年 lee. All rights reserved.
 //
 
 import UIKit
 
-public class LoadingButtonReloader: LoadingReloader {
+public class LoadingSimpleReloader: LoadingReloader {
     
-    public lazy var button: UIButton = {
-        $0.setTitle("加载失败, 点击重试", for: .normal)
-        $0.setTitleColor(.black, for: .normal)
-        $0.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-        return $0
-    } ( UIButton() )
     private var reload: (()->Void)?
     
     required public init(_ size: Size, offset: CGPoint = .zero) {
         super.init(size, offset: offset)
-        addSubview(button)
+        
+        let tap = UITapGestureRecognizer(
+            target: self,
+            action: #selector(tapAction)
+        )
+        addGestureRecognizer(tap)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -34,14 +33,21 @@ public class LoadingButtonReloader: LoadingReloader {
     
     public override func layoutSubviews() {
         super.layoutSubviews()
-        button.frame = bounds
+        subviews.forEach { $0.frame = bounds }
     }
     
     public override func action(_ handle: @escaping (() -> Void)) {
         reload = handle
     }
     
-    @objc private func buttonAction(_ sender: UIButton) {
+    @objc private func tapAction(_ sender: UITapGestureRecognizer) {
         reload?()
+    }
+}
+
+extension LoadingSimpleReloader {
+    
+    func set(view: UIView) {
+        addSubview(view)
     }
 }

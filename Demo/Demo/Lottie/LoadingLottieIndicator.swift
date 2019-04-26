@@ -10,7 +10,7 @@ import UIKit
 import Loading
 import Lottie
 
-class LoadingLottieIndicator: UIView {
+class LoadingLottieIndicator: LoadingIndicator {
 
     private lazy var imageView: AnimationView = {
         $0.backgroundColor = .white
@@ -19,14 +19,13 @@ class LoadingLottieIndicator: UIView {
         return $0
     } ( AnimationView() )
     
-    public var offset: CGPoint = .zero {
-        didSet { superview?.layoutSubviews() }
-    }
-    
-    required public init(_ size: CGSize, offset: CGPoint = .zero) {
-        super.init(frame: CGRect(origin: .zero, size: size))
+    required init(_ size: Size, offset: CGPoint = .zero) {
+        super.init(size, offset: offset)
         self.offset = offset
         addSubview(imageView)
+    }
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
     
     override func layoutSubviews() {
@@ -34,12 +33,12 @@ class LoadingLottieIndicator: UIView {
         imageView.frame = bounds
     }
     
-    override init(frame: CGRect) {
-        fatalError("init(_ size: CGSize, offset: CGPoint)")
+    override func start() {
+        imageView.play()
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(_ size: CGSize, offset: CGPoint)")
+    override func stop() {
+        imageView.stop()
     }
 }
 
@@ -52,15 +51,3 @@ extension LoadingLottieIndicator {
         imageView.animation = Animation.named(name)
     }
 }
-
-extension LoadingLottieIndicator: LoadingIndicatorable {
-    
-    func start() {
-        imageView.play()
-    }
-    
-    func stop() {
-        imageView.stop()
-    }
-}
-

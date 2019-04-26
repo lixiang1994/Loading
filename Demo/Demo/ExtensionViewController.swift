@@ -41,7 +41,7 @@ class ExtensionViewController: UIViewController {
             return
         }
         
-        let temp = view.loading.start(.rotate(#imageLiteral(resourceName: "loading"), size: 30))
+        let temp = view.loading.start(.rotate(#imageLiteral(resourceName: "loading"), at: CGSize(side: 30)))
         let reloader = temp.reloader as? LoadingButtonReloader
         reloader?.button.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
         reloader?.button.titleLabel?.font = .systemFont(ofSize: 13)
@@ -52,7 +52,7 @@ class ExtensionViewController: UIViewController {
             // 失败
             view.loading.fail {
                 // 重新加载
-                view.loading.start(.rotate(#imageLiteral(resourceName: "loading"), size: 30))
+                view.loading.start(.rotate(#imageLiteral(resourceName: "loading"), at: CGSize(side: 30)))
                 
                 // 模拟流程
                 DispatchQueue.main.asyncAfter(deadline: .now() + 4) {

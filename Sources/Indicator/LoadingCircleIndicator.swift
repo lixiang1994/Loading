@@ -13,7 +13,7 @@
 
 import UIKit
 
-public class LoadingCircleIndicator: UIView {
+public class LoadingCircleIndicator: LoadingIndicator {
     
     private lazy var shape: CAShapeLayer = {
         $0.strokeColor = UIColor.white.cgColor
@@ -28,22 +28,13 @@ public class LoadingCircleIndicator: UIView {
     private var timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
     private var isAnimating = false
     
-    public var offset: CGPoint = .zero {
-        didSet { superview?.layoutSubviews() }
-    }
-    
-    required public init(_ size: CGSize, offset: CGPoint = .zero) {
-        super.init(frame: CGRect(origin: .zero, size: size))
-        self.offset = offset
+    public required init(_ size: Size, offset: CGPoint = .zero) {
+        super.init(size, offset: offset)
         setup()
     }
     
-    override init(frame: CGRect) {
-        fatalError("init(_ size: CGSize, offset: CGPoint)")
-    }
-    
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(_ size: CGSize, offset: CGPoint)")
+        super.init(coder: aDecoder)
     }
     
     private func setup() {
@@ -52,7 +43,7 @@ public class LoadingCircleIndicator: UIView {
         layer.addSublayer(shape)
     }
     
-    override public func layoutSubviews() {
+    public override func layoutSubviews() {
         super.layoutSubviews()
         
         shape.position = CGPoint(x: bounds.midX, y: bounds.midY)
@@ -70,22 +61,32 @@ public class LoadingCircleIndicator: UIView {
         )
         shape.path = path.cgPath
     }
+    
+    public override func start() {
+        isAnimating = true
+        addAnimation()
+    }
+    
+    public override func stop() {
+        isAnimating = false
+        removeAnimation()
+    }
 }
 
 extension LoadingCircleIndicator {
     
     /// 设置颜色
     ///
-    /// - Parameter color: 颜色
-    func set(color: UIColor) {
+    /// - Parameter line: 颜色
+    func set(line color: UIColor) {
         shape.strokeColor = color.cgColor
     }
     
     /// 设置线条宽度
     ///
     /// - Parameter line: 宽度
-    func set(line: CGFloat) {
-        shape.lineWidth = line
+    func set(line width: CGFloat) {
+        shape.lineWidth = width
         layoutSubviews()
     }
     
@@ -109,19 +110,6 @@ extension LoadingCircleIndicator {
             removeAnimation()
             addAnimation()
         }
-    }
-}
-
-extension LoadingCircleIndicator: LoadingIndicatorable {
-   
-    public func start() {
-        isAnimating = true
-        addAnimation()
-    }
-    
-    public func stop() {
-        isAnimating = false
-        removeAnimation()
     }
 }
 

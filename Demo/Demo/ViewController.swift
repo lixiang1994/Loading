@@ -52,7 +52,7 @@ class ViewController: UIViewController {
 
 extension ViewController {
     
-    private func simulation(loading view: LoadingView) {
+    private func simulation(_ view: LoadingView) {
         
         cancelButtonItem.isEnabled = true
         
@@ -117,10 +117,10 @@ extension ViewController: UITableViewDataSource {
             loadingView.frame = view.bounds
             
             // 模拟加载流程
-            simulation(loading: loadingView)
+            simulation(loadingView)
             
         case 1:
-            let loadingView = Loading.view(.rotate(#imageLiteral(resourceName: "loading"), size: 50))
+            let loadingView = Loading.view(.rotate(#imageLiteral(resourceName: "loading"), at: 50))
             loadingView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.4460616438)
             view.addSubview(loadingView)
             let reloader = loadingView.reloader as? LoadingButtonReloader
@@ -133,10 +133,11 @@ extension ViewController: UITableViewDataSource {
             view.layoutIfNeeded()
             
             // 模拟加载流程
-            simulation(loading: loadingView)
+            simulation(loadingView)
             
         case 2:
-            let loadingView = Loading.view(.circle(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), duration: 1, lineWidth: 4))
+            let duration: TimeInterval = 1.0
+            let loadingView = Loading.view(.circle(line: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), line: 4, duration, at: 50))
             loadingView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.4460616438)
             view.addSubview(loadingView)
             let reloader = loadingView.reloader as? LoadingButtonReloader
@@ -146,7 +147,7 @@ extension ViewController: UITableViewDataSource {
             loadingView.frame = view.bounds
             
             // 模拟加载流程
-            simulation(loading: loadingView)
+            simulation(loadingView)
             
         case 3:
             let images: [UIImage] = (0...15).compactMap {
@@ -158,8 +159,8 @@ extension ViewController: UITableViewDataSource {
                 }
                 return UIImage(data: data, scale: 2.0)
             }
-            
-            let loadingView = Loading.view(.images(images, duration: 0.8, repeat: 0))
+            let size = images.first?.size ?? .init(side: 50.0)
+            let loadingView = Loading.view(.images(images, 0.8, at: size))
             loadingView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
             view.addSubview(loadingView)
             
@@ -170,7 +171,7 @@ extension ViewController: UITableViewDataSource {
             view.layoutIfNeeded()
             
             // 模拟加载流程
-            simulation(loading: loadingView)
+            simulation(loadingView)
             
         case 4:
             guard
@@ -193,17 +194,17 @@ extension ViewController: UITableViewDataSource {
             view.layoutIfNeeded()
             
             // 模拟加载流程
-            simulation(loading: loadingView)
+            simulation(loadingView)
             
             // 模拟动态更改偏移位置
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                indicator.offset = CGPoint(x: 0, y: -50)
+                loadingView.indicator.offset = CGPoint(x: 0, y: -50)
             }
             
         case 5:
-            let indicator = LoadingLottieIndicator(CGSize(width: 300, height: 300))
+            let indicator = LoadingLottieIndicator(300)
             indicator.set(animation: "PinJump")
-            let loadingView = Loading.view(indicator)
+            let loadingView = Loading.view(indicator, .text("抱歉失败啦, 点我重试"))
             loadingView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
             view.addSubview(loadingView)
             
@@ -214,11 +215,10 @@ extension ViewController: UITableViewDataSource {
             view.layoutIfNeeded()
             
             // 模拟加载流程
-            simulation(loading: loadingView)
+            simulation(loadingView)
             
         default:
             break
         }
     }
 }
-

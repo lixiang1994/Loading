@@ -10,21 +10,19 @@ import UIKit
 import Loading
 import ImageIO
 
-class LoadingCustomIndicator: UIView {
+class LoadingCustomIndicator: LoadingIndicator {
     
     private lazy var imageView: UIImageView = {
         $0.backgroundColor = .white
         return $0
     } ( UIImageView() )
     
-    public var offset: CGPoint = .zero {
-        didSet { superview?.layoutSubviews() }
-    }
-    
-    required public init(_ size: CGSize, offset: CGPoint = .zero) {
-        super.init(frame: CGRect(origin: .zero, size: size))
-        self.offset = offset
+    required public init(_ size: Size, offset: CGPoint = .zero) {
+        super.init(size, offset: offset)
         addSubview(imageView)
+    }
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
     
     override func layoutSubviews() {
@@ -32,12 +30,12 @@ class LoadingCustomIndicator: UIView {
         imageView.frame = bounds
     }
     
-    override init(frame: CGRect) {
-        fatalError("init(_ size: CGSize, offset: CGPoint)")
+    override func start() {
+        imageView.startAnimating()
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(_ size: CGSize, offset: CGPoint)")
+    override func stop() {
+        imageView.stopAnimating()
     }
 }
 
@@ -70,15 +68,3 @@ extension LoadingCustomIndicator {
         imageView.animationRepeatCount = 0
     }
 }
-
-extension LoadingCustomIndicator: LoadingIndicatorable {
-    
-    func start() {
-        imageView.startAnimating()
-    }
-    
-    func stop() {
-        imageView.stopAnimating()
-    }
-}
-

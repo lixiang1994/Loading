@@ -34,16 +34,18 @@ extension LoadingCompatible {
 
 extension UIView: LoadingCompatible { }
 
-public extension LoadingWrapper where Base: UIView {
+extension LoadingWrapper where Base: UIView {
     
     @discardableResult
-    func start(_ type: Loading.Indicator, tag: Int = 1994) -> LoadingView {
-        let view = Loading.view(type)
+    public func start(_ indicator: LoadingIndicator = .system(.white),
+                      _ reloader: LoadingReloader = .text("加载失败, 点击重试"),
+                      tag: Int = 1994) -> LoadingView {
+        let view = Loading.view(indicator)
         start(view, tag: tag)
         return view
     }
     
-    func start(_ view: LoadingView, tag: Int = 1994) {
+    public func start(_ view: LoadingView, tag: Int = 1994) {
         stop(tag)
         
         view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -56,8 +58,8 @@ public extension LoadingWrapper where Base: UIView {
         view.start()
     }
     
-    func fail(_ tag: Int = 1994, reload handle: (()->Void)? = .none) {
-        guard let view = base.viewWithTag(tag) as? LoadingView else {
+    public func fail(_ tag: Int = 1994, reload handle: (()->Void)? = .none) {
+        guard let view = base.viewWithTag(tag) as? UIView & Loadingable else {
             return
         }
         
@@ -69,8 +71,8 @@ public extension LoadingWrapper where Base: UIView {
         view.fail()
     }
     
-    func stop(_ tag: Int = 1994) {
-        guard let view = base.viewWithTag(tag) as? LoadingView else {
+    public func stop(_ tag: Int = 1994) {
+        guard let view = base.viewWithTag(tag) as? UIView & Loadingable else {
             return
         }
         

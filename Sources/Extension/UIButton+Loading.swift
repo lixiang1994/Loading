@@ -15,7 +15,7 @@ import UIKit
 
 private var tempKey: Void?
 
-public extension LoadingWrapper where Base: UIButton {
+extension LoadingWrapper where Base: UIButton {
     
     private struct Info {
         let images: [(Int, UIImage)]
@@ -37,11 +37,15 @@ public extension LoadingWrapper where Base: UIButton {
         set { objc_setAssociatedObject(base, &tempKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
     }
     
-    func start(_ type: Loading.Indicator, tag: Int = 1994) {
-        start(Loading.view(type), tag: tag)
+    @discardableResult
+    public func start(_ indicator: LoadingIndicator = .system(.white),
+                      tag: Int = 1994) -> LoadingView {
+        let view = Loading.view(indicator)
+        start(view, tag: tag)
+        return view
     }
     
-    func start(_ view: LoadingView, tag: Int = 1994) {
+    public func start(_ view: LoadingView, tag: Int = 1994) {
         stop(tag)
         
         base.layoutIfNeeded()
@@ -100,7 +104,7 @@ public extension LoadingWrapper where Base: UIButton {
         view.start()
     }
     
-    func stop(_ tag: Int = 1994) {
+    public func stop(_ tag: Int = 1994) {
         defer {
             base.isUserInteractionEnabled = true
         }
@@ -127,7 +131,7 @@ public extension LoadingWrapper where Base: UIButton {
         self.temp = nil
     }
     
-    func fail(_ tag: Int = 1994, reload handle: @escaping ()->Void) {
+    public func fail(_ tag: Int = 1994, reload handle: @escaping ()->Void) {
         print("UIButton 无 fail 状态")
     }
 }

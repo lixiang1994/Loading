@@ -13,29 +13,20 @@
 
 import UIKit
 
-class LoadingRotateIndicator: UIView {
+class LoadingRotateIndicator: LoadingIndicator {
     
     private lazy var view: UIImageView = {
         $0.backgroundColor = .clear
         return $0
     } ( UIImageView() )
     
-    public var offset: CGPoint = .zero {
-        didSet { superview?.layoutSubviews() }
-    }
-    
-    required public init(_ size: CGSize, offset: CGPoint = .zero) {
-        super.init(frame: CGRect(origin: .zero, size: size))
-        self.offset = offset
+    required init(_ size: Size, offset: CGPoint = .zero) {
+        super.init(size, offset: offset)
         setup()
     }
     
-    override init(frame: CGRect) {
-        fatalError("init(_ size: CGSize, offset: CGPoint)")
-    }
-    
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(_ size: CGSize, offset: CGPoint)")
+        super.init(coder: aDecoder)
     }
     
     private func setup() {
@@ -48,6 +39,14 @@ class LoadingRotateIndicator: UIView {
         super.layoutSubviews()
         view.frame = bounds
     }
+    
+    public override func start() {
+        addAnimation()
+    }
+    
+    public override func stop() {
+        removeAnimation()
+    }
 }
 
 extension LoadingRotateIndicator {
@@ -57,16 +56,6 @@ extension LoadingRotateIndicator {
     /// - Parameter image: 图片
     func set(image: UIImage) {
         view.image = image
-    }
-}
-extension LoadingRotateIndicator: LoadingIndicatorable {
-    
-    func start() {
-        addAnimation()
-    }
-    
-    func stop() {
-        removeAnimation()
     }
 }
 

@@ -1,5 +1,5 @@
 //
-//  LoadingContainerView.swift
+//  LoadingDefaultView.swift
 //  ┌─┐      ┌───────┐ ┌───────┐
 //  │ │      │ ┌─────┘ │ ┌─────┘
 //  │ │      │ └─────┐ │ └─────┐
@@ -13,30 +13,24 @@
 
 import UIKit
 
-class LoadingContainerView<I: LoadingIndicator, R: LoadingReloader>: UIView {
-    
-    private let indicatorView: I
-    private let reloaderView: R
+class LoadingDefaultView: LoadingView {
     
     private var action: (()->Void)?
     
-    init(_ indicator: I, _ reloader: R) {
-        indicatorView = indicator
-        reloaderView = reloader
-        super.init(frame: .zero)
-        
+    required init(_ indicator: LoadingIndicator, _ reloader: LoadingReloader) {
+        super.init(indicator, reloader)
         setup()
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
     }
     
     private func setup() {
         isHidden = true
         
-        addSubview(indicatorView)
-        addSubview(reloaderView)
+        addSubview(indicator)
+        addSubview(reloader)
         
         let tap = UITapGestureRecognizer(
             target: self,
@@ -49,56 +43,45 @@ class LoadingContainerView<I: LoadingIndicator, R: LoadingReloader>: UIView {
         super.layoutSubviews()
         
         do {
-            let offset = indicatorView.offset
+            let offset = indicator.offset
             let x = bounds.width * 0.5 + offset.x
             let y = bounds.height * 0.5 + offset.y
-            indicatorView.center = CGPoint(x: x, y: y)
+            indicator.center = CGPoint(x: x, y: y)
         }
         do {
-            let offset = reloaderView.offset
+            let offset = reloader.offset
             let x = bounds.width * 0.5 + offset.x
             let y = bounds.height * 0.5 + offset.y
-            reloaderView.center = CGPoint(x: x, y: y)
+            reloader.center = CGPoint(x: x, y: y)
         }
     }
     
     @objc private func tapAction(_ sender: UITapGestureRecognizer) {
         action?()
     }
-}
-
-extension LoadingContainerView: Loadingable {
     
-    public var indicator: LoadingIndicator {
-        return indicatorView
-    }
-    
-    public var reloader: LoadingReloader {
-        return reloaderView
-    }
-    
-    public func start() {
+    public override func start() {
         isHidden = false
-        reloaderView.isHidden = true
-        indicatorView.isHidden = false
-        indicatorView.start()
+        reloader.isHidden = true
+        indicator.isHidden = false
+        indicator.start()
     }
     
-    public func stop() {
+    public override func stop() {
         isHidden = true
-        reloaderView.isHidden = true
-        indicatorView.isHidden = true
-        indicatorView.stop()
+        reloader.isHidden = true
+        indicator.isHidden = true
+        indicator.stop()
     }
     
-    public func fail() {
+    public override func fail() {
         isHidden = false
-        reloaderView.isHidden = false
-        indicatorView.isHidden = true
-        indicatorView.stop()
+        reloader.isHidden = false
+        indicator.isHidden = true
+        indicator.stop()
     }
     
-    public func action(_ handle: @escaping (()->Void)) {
+    public override func action(_ handle: @escaping (()->Void)) {
         action = handle
     }
 }

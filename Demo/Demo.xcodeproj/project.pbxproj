@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		79972BF51E407AD7AF2C4CED /* Pods_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF57B41D73F13E626AD52CC2 /* Pods_Demo.framework */; };
+		C9170B792273223600052A4E /* CGSize+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9170B782273223600052A4E /* CGSize+Extension.swift */; };
 		C92DBF6822702D5F0054DF7C /* LoadingLottieIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92DBF6722702D5F0054DF7C /* LoadingLottieIndicator.swift */; };
 		C92DBF6A227040F00054DF7C /* PinJump.json in Resources */ = {isa = PBXBuildFile; fileRef = C92DBF69227040F00054DF7C /* PinJump.json */; };
 		C94ABFAC226F442B0078B745 /* loading05@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C94ABF9C226F442A0078B745 /* loading05@2x.png */; };
@@ -40,6 +41,7 @@
 /* Begin PBXFileReference section */
 		99311A51BC668B9DD4DD9CC1 /* Pods-Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo.release.xcconfig"; path = "Target Support Files/Pods-Demo/Pods-Demo.release.xcconfig"; sourceTree = "<group>"; };
 		B8E5CFA4BE42DC12ECBD7CBF /* Pods-Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo.debug.xcconfig"; path = "Target Support Files/Pods-Demo/Pods-Demo.debug.xcconfig"; sourceTree = "<group>"; };
+		C9170B782273223600052A4E /* CGSize+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+Extension.swift"; sourceTree = "<group>"; };
 		C92DBF6722702D5F0054DF7C /* LoadingLottieIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingLottieIndicator.swift; sourceTree = "<group>"; };
 		C92DBF69227040F00054DF7C /* PinJump.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PinJump.json; sourceTree = "<group>"; };
 		C94ABF9C226F442A0078B745 /* loading05@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loading05@2x.png"; sourceTree = "<group>"; };
@@ -99,6 +101,14 @@
 				99311A51BC668B9DD4DD9CC1 /* Pods-Demo.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		C9170B772273222300052A4E /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				C9170B782273223600052A4E /* CGSize+Extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		C92DBF6622702D320054DF7C /* Lottie */ = {
@@ -164,6 +174,7 @@
 		C9B2498C226DF1A40036083B /* Demo */ = {
 			isa = PBXGroup;
 			children = (
+				C9170B772273222300052A4E /* Extension */,
 				C92DBF6622702D320054DF7C /* Lottie */,
 				C94ABFBC226F4C410078B745 /* Custom */,
 				C94ABF9B226F441A0078B745 /* Resource */,
@@ -324,6 +335,7 @@
 				C9B24990226DF1A40036083B /* ViewController.swift in Sources */,
 				C94ABFBE226F4C6E0078B745 /* LoadingCustomReloader.swift in Sources */,
 				C92DBF6822702D5F0054DF7C /* LoadingLottieIndicator.swift in Sources */,
+				C9170B792273223600052A4E /* CGSize+Extension.swift in Sources */,
 				C9B249A0226EF2620036083B /* ExtensionViewController.swift in Sources */,
 				C9B2498E226DF1A40036083B /* AppDelegate.swift in Sources */,
 			);

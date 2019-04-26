@@ -13,45 +13,6 @@
 
 import UIKit
 
-public protocol Loadingable {
-    
-    var indicator: LoadingIndicator { get }
-    
-    var reloader: LoadingReloader { get }
-    
-    func start()
-    
-    func stop()
-    
-    func fail()
-    
-    func action(_ handle: @escaping (()->Void))
-}
-
-public protocol LoadingIndicatorable {
-    
-    var offset: CGPoint { get set }
-    
-    init(_ size: CGSize, offset: CGPoint)
-    
-    func start()
-    
-    func stop()
-}
-
-public protocol LoadingReloadable {
-    
-    var offset: CGPoint { get set }
-    
-    init(_ size: CGSize, offset: CGPoint)
-    
-    func action(_ handle: @escaping (()->Void))
-}
-
-public typealias LoadingView = (UIView & Loadingable)
-public typealias LoadingIndicator = (UIView & LoadingIndicatorable)
-public typealias LoadingReloader = (UIView & LoadingReloadable)
-
 public enum Loading {}
 
 extension Loading {
@@ -66,64 +27,82 @@ extension Loading {
         case success
         case failure
     }
+}
+
+extension LoadingIndicator {
     
-    /// 指示器类型
-    ///
-    /// - system: 系统菊花
-    /// - rotate: 旋转图片
-    /// - circle: 圆形环形
-    /// - images: 序列帧
-    public enum Indicator {
-        case system(UIActivityIndicatorView.Style)
-        case rotate(UIImage, size: CGFloat)
-        case circle(UIColor, duration: TimeInterval, lineWidth: CGFloat)
-        case images([UIImage], duration: TimeInterval, repeat: Int)
+    public static func system(_ style: UIActivityIndicatorView.Style,
+                              at size: Size = 50) -> LoadingIndicator {
+        let temp = LoadingSystemIndicator(size.size)
+        temp.set(style: style)
+        return temp
+    }
+    
+    public static func rotate(_ image: UIImage,
+                              at size: Size = 50) -> LoadingIndicator {
+        let temp = LoadingRotateIndicator(size.size)
+        temp.set(image: image)
+        return temp
+    }
+    
+    public static func circle(line color: UIColor = .white,
+                              line width: CGFloat = 2.0,
+                              _ duration: TimeInterval = 1.0,
+                              _ timingFunction: CAMediaTimingFunction = .init(name: .default),
+                              at size: Size = 50) -> LoadingIndicator {
+        let temp = LoadingCircleIndicator(size.size)
+        temp.set(line: color)
+        temp.set(line: width)
+        temp.set(duration: duration)
+        temp.set(timingFunction: timingFunction)
+        return temp
+    }
+    
+    public static func images(_ images: [UIImage],
+                              repeat count: Int = 0,
+                              _ duration: TimeInterval = 1.0,
+                              at size: Size = 50) -> LoadingIndicator {
+        let temp = LoadingImagesIndicator(size.size)
+        temp.set(images: images)
+        temp.set(duration: duration)
+        temp.set(repeat: count)
+        return temp
+    }
+}
+
+extension LoadingReloader {
+    
+    public static func text(_ string: String,
+                            _ font: UIFont = .systemFont(ofSize: 17),
+                            _ color: UIColor = .black,
+                            at size: Size = CGSize(width: 200, height: 80)) -> LoadingReloader {
+        let temp = LoadingButtonReloader(size.size)
+        temp.button.setTitle(string, for: .normal)
+        temp.button.setTitleColor(color, for: .normal)
+        temp.button.titleLabel?.font = font
+        return temp
+    }
+    
+    public static func image(_ image: UIImage,
+                             at size: Size = CGSize(width: 200, height: 80)) -> LoadingReloader {
+        let temp = LoadingButtonReloader(size.size)
+        temp.button.setTitle("", for: .normal)
+        temp.button.setImage(image, for: .normal)
+        return temp
+    }
+    
+    public static func view(_ view: UIView,
+                            at size: Size = CGSize(width: 200, height: 80)) -> LoadingReloader {
+        let temp = LoadingSimpleReloader(size.size)
+        temp.set(view: view)
+        return temp
     }
 }
 
 extension Loading {
     
-    public static func view(_ type: Indicator) -> LoadingView {
-        let reloader = LoadingButtonReloader(CGSize(width: 200, height: 80))
-        return view(type, reloader)
-    }
-    
-    public static func view<R: LoadingReloader>(_ type: Indicator, _ reloader: R) -> LoadingView {
-        
-        switch type {
-        case let .system(style):
-            let temp = LoadingSystemIndicator(CGSize(width: 50, height: 50))
-            temp.set(style: style)
-            return LoadingContainerView(temp, reloader)
-            
-        case let .rotate(image, size):
-            let temp = LoadingRotateIndicator(CGSize(width: size, height: size))
-            temp.set(image: image)
-            return LoadingContainerView(temp, reloader)
-            
-        case let .circle(color, duration, line):
-            let temp = LoadingCircleIndicator(CGSize(width: 50, height: 50))
-            temp.set(color: color)
-            temp.set(line: line)
-            temp.set(duration: duration)
-            return LoadingContainerView(temp, reloader)
-            
-        case let .images(images, duration, count):
-            let size = images.first?.size ?? CGSize(width: 50, height: 50)
-            let temp = LoadingImagesIndicator(size)
-            temp.set(images: images)
-            temp.set(duration: duration)
-            temp.set(repeat: count)
-            return LoadingContainerView(temp, reloader)
-        }
-    }
-    
-    public static func view<I: LoadingIndicator>(_ indicator: I) -> LoadingView {
-        let reloader = LoadingButtonReloader(CGSize(width: 200, height: 80))
-        return LoadingContainerView(indicator, reloader)
-    }
-    
-    public static func view<I: LoadingIndicator, R: LoadingReloader>(_ indicator: I, _ reloader: R) -> LoadingView {
-        return LoadingContainerView(indicator, reloader)
+    public static func view(_ indicator: LoadingIndicator = .system(.white),
+                            _ reloader: LoadingReloader = .text("加载失败, 点击重试")) -> LoadingView {
+        return LoadingDefaultView(indicator, reloader)
     }
 }

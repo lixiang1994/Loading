@@ -9,7 +9,7 @@
 import UIKit
 import Loading
 
-class LoadingCustomReloader: UIView {
+class LoadingCustomReloader: LoadingReloader {
 
     private var imageView: UIImageView = {
         $0.image = #imageLiteral(resourceName: "fail")
@@ -26,16 +26,14 @@ class LoadingCustomReloader: UIView {
     } ( UIButton() )
     private var reload: (()->Void)?
     
-    public var offset: CGPoint = .zero {
-        didSet { superview?.layoutSubviews() }
-    }
-    
-    required public init(_ size: CGSize, offset: CGPoint = .zero) {
-        super.init(frame: CGRect(origin: .zero, size: size))
-        self.offset = offset
+    required public init(_ size: Size, offset: CGPoint = .zero) {
+        super.init(size, offset: offset)
         
         setup()
         setupLayout()
+    }
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
     
     private func setup() {
@@ -56,22 +54,11 @@ class LoadingCustomReloader: UIView {
         }
     }
     
-    override init(frame: CGRect) {
-        fatalError("init(_ size: CGSize, offset: CGPoint)")
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(_ size: CGSize, offset: CGPoint)")
+    override func action(_ handle: @escaping (() -> Void)) {
+        reload = handle
     }
     
     @objc private func buttonAction(_ sender: UIButton) {
         reload?()
-    }
-}
-
-extension LoadingCustomReloader: LoadingReloadable {
-    
-    func action(_ handle: @escaping (() -> Void)) {
-        reload = handle
     }
 }
