@@ -48,7 +48,7 @@ Here are some usage examples. All devices are also available as simulators:
 ```swift
 view.loading.start(
     .rotate(#imageLiteral(resourceName: "loading"), at: 30),
-    .text("点击重试", font: .systemFont(ofSize: 13), color: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0))
+    .text("again", font: .systemFont(ofSize: 13), color: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0))
 )
 
 view.loading.fail() { 
