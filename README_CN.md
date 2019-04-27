@@ -1,8 +1,7 @@
 # Loading
 ![Swift](https://img.shields.io/badge/Swift-5.0-orange.svg)
 
-An elegant loading view written in swift
-
+一个基于Swift优雅的加载视图
 
 ## 特性
 
