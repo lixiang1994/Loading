@@ -257,4 +257,4 @@ class LoadingXXXXXView: LoadingView {
 
 ## 许可协议
 
-Loading 使用 GPL 协议。 有关更多信息，请参阅 [LICENSE](LICENSE) 文件。
+Loading 使用 MIT 协议。 有关更多信息，请参阅 [LICENSE](LICENSE) 文件。
