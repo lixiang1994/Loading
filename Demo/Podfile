@@ -5,7 +5,7 @@ target 'Demo' do
   use_frameworks!
   
   pod 'Loading', :path => "../"
-  pod 'SnapKit', '~>4.2.0'
+  pod 'SnapKit', '~>5.0.0'
   pod 'lottie-ios', '~>3.0.4'
   
 end
