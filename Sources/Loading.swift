@@ -68,6 +68,19 @@ extension LoadingIndicator {
         temp.set(repeat: count)
         return temp
     }
+    
+    public static func progress(line color: UIColor = .black,
+                                line width: CGFloat = 2.0,
+                                backgroundLine bColor: UIColor = .white,
+                                backgroundLine bWidth: CGFloat = 2.0,
+                                at size: Size = 50) -> LoadingProgressIndicator {
+        let temp = LoadingProgressIndicator(size)
+        temp.set(line: color)
+        temp.set(line: width)
+        temp.set(backgroundLine: bColor)
+        temp.set(backgroundLine: bWidth)
+        return temp
+    }
 }
 
 extension LoadingReloader {

@@ -21,7 +21,8 @@ class ViewController: UIViewController {
         "圆形环形指示器",
         "序列帧指示器",
         "自定义指示器",
-        "Lottie指示器"
+        "Lottie指示器",
+        "进度条指示器"
     ]
     
     override func viewDidLoad() {
@@ -218,6 +219,42 @@ extension ViewController: UITableViewDataSource {
             
             // 模拟加载流程
             simulation(loadingView)
+            
+        case 6:
+            let indicator = LoadingIndicator.progress()
+            indicator.label.textColor = #colorLiteral(red: 0.1803921569, green: 0.3411764706, blue: 0.7725490196, alpha: 1)
+            indicator.set(line: 4)
+            indicator.set(line: #colorLiteral(red: 0.1803921569, green: 0.3411764706, blue: 0.7725490196, alpha: 1))
+            indicator.set(backgroundLine: 4)
+            indicator.set(backgroundLine: #colorLiteral(red: 0.9254901961, green: 0.9254901961, blue: 0.9254901961, alpha: 1))
+            let loadingView = Loading.view(indicator, .text("抱歉失败啦, 点我重试"))
+            loadingView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            view.addSubview(loadingView)
+            
+            // SnapKit
+            loadingView.snp.makeConstraints { (make) in
+                make.edges.equalToSuperview()
+            }
+            view.layoutIfNeeded()
+            
+            // 模拟加载流程
+            loadingView.start()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                indicator.progress = 0.12
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                indicator.progress = 0.33
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                indicator.progress = 0.86
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+                indicator.progress = 0.99
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                indicator.progress = 1.0
+                loadingView.stop()
+            }
             
         default:
             break
