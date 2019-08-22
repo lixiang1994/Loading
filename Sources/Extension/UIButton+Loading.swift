@@ -21,6 +21,7 @@ extension LoadingWrapper where Base: UIButton {
         let images: [(Int, UIImage)]
         let colors: [(Int, UIColor)]
         let titles: [(Int, NSAttributedString)]
+        let backgrounds: [(Int, UIImage)]
     }
     
     private var states: [UIControl.State] {
@@ -53,6 +54,10 @@ extension LoadingWrapper where Base: UIButton {
         
         let maskView = UIImageView()
         maskView.tag = tag
+        // 遮罩视图同步UIButton背景样式
+        maskView.contentMode = .scaleToFill
+        maskView.image = base.currentBackgroundImage
+        maskView.backgroundColor = base.backgroundColor
         
         // 获取UIButton所有状态内容
         let images = states.enumerated().compactMap {
@@ -70,9 +75,14 @@ extension LoadingWrapper where Base: UIButton {
             guard let v = base.attributedTitle(for: state) else { return nil }
             return (i, v)
         }
+        let backgrounds = states.enumerated().compactMap {
+            (i, state) -> (Int, UIImage)? in
+            guard let v = base.backgroundImage(for: state) else { return nil }
+            return (i, v)
+        }
         
         // 临时存储内容
-        self.temp = Info(images: images, colors: colors, titles: titles)
+        self.temp = Info(images: images, colors: colors, titles: titles, backgrounds: backgrounds)
         
         // 设置所有内容为透明
         images.filtered(duplication: { $0.1 }).forEach {
@@ -88,10 +98,10 @@ extension LoadingWrapper where Base: UIButton {
             title = title.reset(background: { _ in return .clear })
             base.setAttributedTitle(title, for: states[$0.0])
         }
-        
-        // 遮罩视图同步UIButton背景样式
-        maskView.image = base.currentBackgroundImage
-        maskView.backgroundColor = base.backgroundColor
+        backgrounds.filtered(duplication: { $0.1 }).forEach {
+            let image = UIImage(color: .clear, size: $0.1.size)
+            base.setBackgroundImage(image, for: states[$0.0])
+        }
         
         view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         maskView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -127,6 +137,9 @@ extension LoadingWrapper where Base: UIButton {
         }
         temp.titles.filtered(duplication: { $0.1 }).forEach {
             base.setAttributedTitle($0.1, for: states[$0.0])
+        }
+        temp.backgrounds.filtered(duplication: { $0.1 }).forEach {
+            base.setBackgroundImage($0.1, for: states[$0.0])
         }
         self.temp = nil
     }
