@@ -73,8 +73,8 @@ extension LoadingIndicator {
                                 line width: CGFloat = 2.0,
                                 backgroundLine bColor: UIColor = .white,
                                 backgroundLine bWidth: CGFloat = 2.0,
-                                at size: Size = 50) -> LoadingProgressIndicator {
-        let temp = LoadingProgressIndicator(size)
+                                at size: Size = 50) -> LoadingCircleProgressIndicator {
+        let temp = LoadingCircleProgressIndicator(size)
         temp.set(line: color)
         temp.set(line: width)
         temp.set(backgroundLine: bColor)

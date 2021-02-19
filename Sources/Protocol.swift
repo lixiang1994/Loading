@@ -37,6 +37,11 @@ public protocol LoadingIndicatorable {
     func stop()
 }
 
+public protocol LoadingProgressIndicatorable: LoadingIndicatorable {
+    
+    var progress: Double { get set }
+}
+
 public protocol LoadingReloadable {
     
     var offset: CGPoint { get set }

@@ -1,5 +1,5 @@
 //
-//  LoadingProgressIndicator.swift
+//  LoadingCircleProgressIndicator.swift
 //  ┌─┐      ┌───────┐ ┌───────┐
 //  │ │      │ ┌─────┘ │ ┌─────┘
 //  │ │      │ └─────┐ │ └─────┐
@@ -11,9 +11,9 @@
 //  Copyright © 2019年 lee. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-public class LoadingProgressIndicator: LoadingIndicator {
+public class LoadingCircleProgressIndicator: LoadingProgressIndicator {
     
     public typealias Format = (Double) -> String
     
@@ -53,6 +53,26 @@ public class LoadingProgressIndicator: LoadingIndicator {
     
     private var format: Format = {
         return "\(Int($0 * 100))%"
+    }
+    
+    /// 设置当前进度  0 - 1
+    public override var progress: Double {
+        get {
+            return Double(circleLayer.strokeEnd)
+        }
+        set {
+            if (newValue > 1) {
+                circleLayer.strokeEnd = 1
+                
+            } else if (newValue < 0) {
+                circleLayer.strokeEnd = 0
+                
+            } else {
+                circleLayer.strokeEnd = CGFloat(newValue)
+            }
+            
+            label.text = format(newValue)
+        }
     }
     
     required init(_ size: Size, offset: CGPoint = .zero) {
@@ -98,27 +118,7 @@ public class LoadingProgressIndicator: LoadingIndicator {
     }
 }
 
-extension LoadingProgressIndicator {
-    
-    /// 设置当前进度  0 - 1
-    public var progress: Double {
-        get {
-            return Double(circleLayer.strokeEnd)
-        }
-        set {
-            if (newValue > 1) {
-                circleLayer.strokeEnd = 1
-                
-            } else if (newValue < 0) {
-                circleLayer.strokeEnd = 0
-                
-            } else {
-                circleLayer.strokeEnd = CGFloat(newValue)
-            }
-            
-            label.text = format(newValue)
-        }
-    }
+extension LoadingCircleProgressIndicator {
     
     /// 设置格式
     ///

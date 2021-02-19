@@ -23,7 +23,7 @@ open class LoadingIndicator: UIView, LoadingIndicatorable {
     
     public required init(_ size: Size, offset: CGPoint = .zero) {
         self.offset = offset
-        super.init(frame: CGRect(origin: .zero, size: size.size))
+        super.init(frame: .init(origin: .zero, size: size.size))
     }
     
     public required init?(coder aDecoder: NSCoder) {
@@ -39,5 +39,23 @@ open class LoadingIndicator: UIView, LoadingIndicatorable {
     
     open func stop() {
         
+    }
+}
+
+open class LoadingProgressIndicator: LoadingIndicator, LoadingProgressIndicatorable {
+    
+    public typealias Size = SizeConvertible
+    
+    open var progress: Double = 0
+    
+    public required init(_ size: Size, offset: CGPoint = .zero) {
+        super.init(frame: .init(origin: .zero, size: size.size))
+    }
+    
+    public required init?(coder aDecoder: NSCoder) {
+        fatalError("init(_ size: CGSize, offset: CGPoint = .zero)")
+    }
+    override init(frame: CGRect) {
+        fatalError("init(_ size: CGSize, offset: CGPoint = .zero)")
     }
 }
