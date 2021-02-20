@@ -180,7 +180,7 @@ class LoadingXXXXXXReloader: LoadingReloader {
 // 自定义加载视图 继承自LoadingStateView 并重写相关方法和逻辑, 以下示例为默认加载视图的实现逻辑
 class LoadingXXXXXStateView<Indicator: LoadingIndicator, Reloader: LoadingReloader>: LoadingStateView<Indicator, Reloader> {
     
-    required init(_ indicator: LoadingIndicator, _ reloader: LoadingReloader) {
+    required init(_ indicator: Indicator, _ reloader: Reloader) {
         super.init(indicator, reloader)
         setup()
     }
