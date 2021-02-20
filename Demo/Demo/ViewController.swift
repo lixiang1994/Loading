@@ -53,7 +53,17 @@ class ViewController: UIViewController {
 
 extension ViewController {
     
-    private func simulation(_ view: LoadingView) {
+    private func simulation<Indicator: LoadingIndicator>(_ view: LoadingView<Indicator>) {
+        
+        cancelButtonItem.isEnabled = true
+        view.action {
+            // 加载视图点击事件
+        }
+        
+        view.start()
+    }
+    
+    private func simulation<Indicator: LoadingIndicator, Reloader: LoadingReloader>(_ view: LoadingStateView<Indicator, Reloader>) {
         
         cancelButtonItem.isEnabled = true
         

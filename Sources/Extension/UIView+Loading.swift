@@ -37,15 +37,34 @@ extension UIView: LoadingCompatible { }
 extension LoadingWrapper where Base: UIView {
     
     @discardableResult
-    public func start(_ indicator: LoadingIndicator = .system(.white),
-                      _ reloader: LoadingReloader = .text("加载失败, 点击重试"),
-                      tag: Int = 1994) -> LoadingView {
+    public func start<Indicator: LoadingIndicator>(_ indicator: Indicator, tag: Int = 1994) -> LoadingView<Indicator> {
         let view = Loading.view(indicator)
         start(view, tag: tag)
         return view
     }
+
+    public func start<Indicator: LoadingIndicator>(_ view: LoadingView<Indicator>, tag: Int = 1994) {
+        stop(tag)
+
+        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.frame = base.bounds
+        view.tag = tag
+        base.addSubview(view)
+        base.bringSubviewToFront(view)
+        base.layoutIfNeeded()
+
+        view.start()
+    }
     
-    public func start(_ view: LoadingView, tag: Int = 1994) {
+    @discardableResult
+    public func start<Indicator: LoadingIndicator, Reloader: LoadingReloader>
+    (_ indicator: Indicator, _ reloader: Reloader, tag: Int = 1994) -> LoadingStateView<Indicator, Reloader> {
+        let view = Loading.view(indicator, reloader)
+        start(view, tag: tag)
+        return view
+    }
+    
+    public func start<Indicator: LoadingIndicator, Reloader: LoadingReloader>(_ view: LoadingStateView<Indicator, Reloader>, tag: Int = 1994) {
         stop(tag)
         
         view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -59,7 +78,7 @@ extension LoadingWrapper where Base: UIView {
     }
     
     public func fail(_ tag: Int = 1994, reload handle: (()->Void)? = .none) {
-        guard let view = base.viewWithTag(tag) as? UIView & Loadingable else {
+        guard let view = base.viewWithTag(tag) as? LoadingStateView else {
             return
         }
         
@@ -72,7 +91,7 @@ extension LoadingWrapper where Base: UIView {
     }
     
     public func stop(_ tag: Int = 1994) {
-        guard let view = base.viewWithTag(tag) as? UIView & Loadingable else {
+        guard let view = base.viewWithTag(tag) as? LoadingStateView else {
             return
         }
         

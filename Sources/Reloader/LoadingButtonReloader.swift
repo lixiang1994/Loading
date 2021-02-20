@@ -13,7 +13,7 @@
 
 import UIKit
 
-class LoadingButtonReloader: LoadingReloader {
+public class LoadingButtonReloader: LoadingReloader {
     
     lazy var button: UIButton = {
         $0.setTitle("加载失败, 点击重试", for: .normal)
@@ -21,7 +21,6 @@ class LoadingButtonReloader: LoadingReloader {
         $0.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         return $0
     } ( UIButton() )
-    private var reload: (()->Void)?
     
     required public init(_ size: Size, offset: CGPoint = .zero) {
         super.init(size, offset: offset)
@@ -32,16 +31,12 @@ class LoadingButtonReloader: LoadingReloader {
         super.init(coder: aDecoder)
     }
     
-    override func layoutSubviews() {
+    public override func layoutSubviews() {
         super.layoutSubviews()
         button.frame = bounds
     }
     
-    override func action(_ handle: @escaping (() -> Void)) {
-        reload = handle
-    }
-    
     @objc private func buttonAction(_ sender: UIButton) {
-        reload?()
+        action?()
     }
 }

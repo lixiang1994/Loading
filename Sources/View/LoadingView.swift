@@ -13,24 +13,23 @@
 
 import UIKit
 
-open class LoadingView: UIView, Loadingable {
+open class LoadingView<Indicator: LoadingIndicator>: UIView, LoadingViewable {
     
-    public private(set) var indicator: LoadingIndicator
-    public private(set) var reloader: LoadingReloader
+    public private(set) var indicator: Indicator
+    private(set) var action: Action?
     
-    public required init(_ indicator: LoadingIndicator, _ reloader: LoadingReloader) {
+    public required init(_ indicator: Indicator) {
         self.indicator = indicator
-        self.reloader = reloader
         super.init(frame: .zero)
     }
     
     public required init?(coder aDecoder: NSCoder) {
-        fatalError("init(_ indicator: Indicator, _ reloader: Reloader)")
+        fatalError("init(_ indicator: Indicator)")
     }
     override init(frame: CGRect) {
-        fatalError("init(_ indicator: Indicator, _ reloader: Reloader)")
+        fatalError("init(_ indicator: Indicator)")
     }
-
+    
     open func start() {
         
     }
@@ -39,11 +38,35 @@ open class LoadingView: UIView, Loadingable {
         
     }
     
-    open func fail() {
-        
+    open func action(_ handle: @escaping Action) {
+        action = handle
+    }
+}
+
+open class LoadingStateView<Indicator: LoadingIndicator, Reloader: LoadingReloader>: LoadingView<Indicator>, LoadingStateViewable {
+    
+    public private(set) var reloader: Reloader
+    
+    public required init(_ indicator: Indicator, _ reloader: Reloader) {
+        guard type(of: reloader) != LoadingReloader.self else {
+            fatalError("Use LoadingReloader Subclass.")
+        }
+        self.reloader = reloader
+        super.init(indicator)
     }
     
-    open func action(_ handle: @escaping (() -> Void)) {
+    public required init?(coder aDecoder: NSCoder) {
+        fatalError("init(_ indicator: Indicator, _ reloader: Reloader)")
+    }
+    override init(frame: CGRect) {
+        fatalError("init(_ indicator: Indicator, _ reloader: Reloader)")
+    }
+    
+    public required init(_ indicator: Indicator) {
+        fatalError("init(_ indicator: Indicator, _ reloader: Reloader)")
+    }
+    
+    open func fail() {
         
     }
 }

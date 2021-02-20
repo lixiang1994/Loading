@@ -13,7 +13,7 @@
 
 import UIKit
 
-class LoadingRotateIndicator: LoadingIndicator {
+public class LoadingRotateIndicator: LoadingIndicator {
     
     private lazy var view: UIImageView = {
         $0.backgroundColor = .clear
@@ -35,7 +35,7 @@ class LoadingRotateIndicator: LoadingIndicator {
         addSubview(view)
     }
     
-    override func layoutSubviews() {
+    public override func layoutSubviews() {
         super.layoutSubviews()
         view.frame = bounds
     }

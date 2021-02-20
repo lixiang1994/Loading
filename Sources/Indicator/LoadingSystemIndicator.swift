@@ -13,7 +13,7 @@
 
 import UIKit
 
-class LoadingSystemIndicator: LoadingIndicator {
+public class LoadingSystemIndicator: LoadingIndicator {
     
     private lazy var indicator: UIActivityIndicatorView = {
         $0.style = .gray
@@ -36,7 +36,7 @@ class LoadingSystemIndicator: LoadingIndicator {
         addSubview(indicator)
     }
     
-    override func layoutSubviews() {
+    public override func layoutSubviews() {
         super.layoutSubviews()
         indicator.frame = bounds
     }

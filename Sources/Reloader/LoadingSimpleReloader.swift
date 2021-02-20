@@ -13,9 +13,7 @@
 
 import UIKit
 
-class LoadingSimpleReloader: LoadingReloader {
-    
-    private var reload: (()->Void)?
+public class LoadingSimpleReloader: LoadingReloader {
     
     required public init(_ size: Size, offset: CGPoint = .zero) {
         super.init(size, offset: offset)
@@ -31,17 +29,13 @@ class LoadingSimpleReloader: LoadingReloader {
         super.init(coder: aDecoder)
     }
     
-    override func layoutSubviews() {
+    public override func layoutSubviews() {
         super.layoutSubviews()
         subviews.forEach { $0.frame = bounds }
     }
     
-    override func action(_ handle: @escaping (() -> Void)) {
-        reload = handle
-    }
-    
     @objc private func tapAction(_ sender: UITapGestureRecognizer) {
-        reload?()
+        action?()
     }
 }
 

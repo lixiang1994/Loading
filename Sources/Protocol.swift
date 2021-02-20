@@ -13,19 +13,28 @@
 
 import UIKit
 
-public protocol Loadingable {
+public typealias Action = (()->Void)
+
+public protocol LoadingViewable {
     
-    var indicator: LoadingIndicator { get }
+    associatedtype Indicator: LoadingIndicator
     
-    var reloader: LoadingReloader { get }
+    var indicator: Indicator { get }
     
     func start()
     
     func stop()
     
-    func fail()
+    func action(_ handle: @escaping Action)
+}
+
+public protocol LoadingStateViewable: LoadingViewable {
     
-    func action(_ handle: @escaping (()->Void))
+    associatedtype Reloader = LoadingReloader
+    
+    var reloader: Reloader { get }
+    
+    func fail()
 }
 
 public protocol LoadingIndicatorable {
@@ -46,7 +55,7 @@ public protocol LoadingReloadable {
     
     var offset: CGPoint { get set }
     
-    func action(_ handle: @escaping (()->Void))
+    func action(_ handle: @escaping Action)
 }
 
 public protocol SizeConvertible {

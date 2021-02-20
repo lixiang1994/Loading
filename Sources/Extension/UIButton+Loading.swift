@@ -39,14 +39,14 @@ extension LoadingWrapper where Base: UIButton {
     }
     
     @discardableResult
-    public func start(_ indicator: LoadingIndicator = .system(.white),
-                      tag: Int = 1994) -> LoadingView {
+    public func start<Indicator: LoadingIndicator>
+    (_ indicator: Indicator = LoadingIndicator.system(.white) as! Indicator, tag: Int = 1994) -> LoadingView<Indicator> {
         let view = Loading.view(indicator)
         start(view, tag: tag)
         return view
     }
     
-    public func start(_ view: LoadingView, tag: Int = 1994) {
+    public func start<Indicator: LoadingIndicator>(_ view: LoadingView<Indicator>, tag: Int = 1994) {
         stop(tag)
         
         base.layoutIfNeeded()
