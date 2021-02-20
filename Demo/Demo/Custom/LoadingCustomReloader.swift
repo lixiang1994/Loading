@@ -24,7 +24,6 @@ class LoadingCustomReloader: LoadingReloader {
         $0.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         return $0
     } ( UIButton() )
-    private var reload: (()->Void)?
     
     required public init(_ size: Size, offset: CGPoint = .zero) {
         super.init(size, offset: offset)
@@ -54,11 +53,7 @@ class LoadingCustomReloader: LoadingReloader {
         }
     }
     
-    override func action(_ handle: @escaping (() -> Void)) {
-        reload = handle
-    }
-    
     @objc private func buttonAction(_ sender: UIButton) {
-        reload?()
+        action?()
     }
 }

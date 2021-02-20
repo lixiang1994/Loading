@@ -20,7 +20,7 @@ open class LoadingReloader: UIView, LoadingReloadable {
     public var offset: CGPoint {
         didSet { superview?.layoutSubviews() }
     }
-    private(set) var action: Action?
+    public private(set) var action: Action?
     
     public required init(_ size: Size, offset: CGPoint = .zero) {
         self.offset = offset
@@ -34,7 +34,7 @@ open class LoadingReloader: UIView, LoadingReloadable {
         fatalError("init(_ size: CGSize, offset: CGPoint = .zero)")
     }
     
-    open func action(_ handle: @escaping (()->Void)) {
+    public func action(_ handle: @escaping (()->Void)) {
         action = handle
     }
 }

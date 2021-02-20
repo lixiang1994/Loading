@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
 s.name         = "Loading"
-s.version      = "1.1.0"
+s.version      = "1.1.1"
 s.summary      = "An elegant loading view written in swift"
 
 s.homepage     = "https://github.com/lixiang1994/Loading"

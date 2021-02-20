@@ -16,7 +16,7 @@ import UIKit
 open class LoadingView<Indicator: LoadingIndicator>: UIView, LoadingViewable {
     
     public private(set) var indicator: Indicator
-    private(set) var action: Action?
+    public private(set) var action: Action?
     
     public required init(_ indicator: Indicator) {
         self.indicator = indicator
