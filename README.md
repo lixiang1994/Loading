@@ -177,9 +177,9 @@ class LoadingXXXXXXReloader: LoadingReloader {
 ```
 
 ```swift
-class LoadingXXXXXStateView: LoadingStateView {
+class LoadingXXXXXStateView<Indicator: LoadingIndicator, Reloader: LoadingReloader>: LoadingStateView<Indicator, Reloader> {
     
-    required init(_ indicator: LoadingIndicator, _ reloader: LoadingReloader) {
+    required init(_ indicator: Indicator, _ reloader: Reloader) {
         super.init(indicator, reloader)
         setup()
     }
