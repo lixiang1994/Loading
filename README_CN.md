@@ -151,6 +151,8 @@ LoadingReloader.view(view)
 ```swift
 // 自定义指示器 继承自LoadingIndicator 并重写相关方法
 class LoadingXXXXXXIndicator: LoadingIndicator {
+    /* ... */
+    
     public override func start() {
         /* ... */
     }
@@ -162,22 +164,23 @@ class LoadingXXXXXXIndicator: LoadingIndicator {
 ```
 
 ```swift
-// 自定义重载器 继承自LoadingReloader 并重写相关方法
+自定义重载器 继承自LoadingReloader 并重写相关方法
 class LoadingXXXXXXReloader: LoadingReloader {
     /* ... */
-    override func action(_ handle: @escaping (() -> Void)) {
-        /* ... */
+    
+    @objc 
+    private func buttonAction(_ sender: UIButton) {
+        // 调用action闭包 触发重试事件回调
+        action?()
     }
 }
 ```
 
 ```swift
-// 自定义加载视图 继承自LoadingReloader 并重写相关方法和逻辑, 以下示例为默认加载视图的实现逻辑
-class LoadingXXXXXView: LoadingView {
+// 自定义加载视图 继承自LoadingStateView 并重写相关方法和逻辑, 以下示例为默认加载视图的实现逻辑
+class LoadingXXXXXStateView<Indicator: LoadingIndicator, Reloader: LoadingReloader>: LoadingStateView<Indicator, Reloader> {
     
-    private var action: (()->Void)?
-    
-    required init(_ indicator: LoadingIndicator, _ reloader: LoadingReloader) {
+    required init(_ indicator: Indicator, _ reloader: Reloader) {
         super.init(indicator, reloader)
         setup()
     }
@@ -191,12 +194,6 @@ class LoadingXXXXXView: LoadingView {
         
         addSubview(indicator)
         addSubview(reloader)
-        
-        let tap = UITapGestureRecognizer(
-            target: self,
-            action: #selector(tapAction)
-        )
-        addGestureRecognizer(tap)
     }
     
     override public func layoutSubviews() {
@@ -214,10 +211,6 @@ class LoadingXXXXXView: LoadingView {
             let y = bounds.height * 0.5 + offset.y
             reloader.center = CGPoint(x: x, y: y)
         }
-    }
-    
-    @objc private func tapAction(_ sender: UITapGestureRecognizer) {
-        action?()
     }
     
     public override func start() {
@@ -239,10 +232,6 @@ class LoadingXXXXXView: LoadingView {
         reloader.isHidden = false
         indicator.isHidden = true
         indicator.stop()
-    }
-    
-    public override func action(_ handle: @escaping (()->Void)) {
-        action = handle
     }
 }
 ```

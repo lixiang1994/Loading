@@ -153,6 +153,8 @@ e.g.
 
 ```swift
 class LoadingXXXXXXIndicator: LoadingIndicator {
+    /* ... */
+    
     public override func start() {
         /* ... */
     }
@@ -166,18 +168,18 @@ class LoadingXXXXXXIndicator: LoadingIndicator {
 ```swift
 class LoadingXXXXXXReloader: LoadingReloader {
     /* ... */
-    override func action(_ handle: @escaping (() -> Void)) {
-        /* ... */
+    
+    @objc 
+    private func buttonAction(_ sender: UIButton) {
+        action?()
     }
 }
 ```
 
 ```swift
-class LoadingXXXXXView: LoadingView {
+class LoadingXXXXXStateView<Indicator: LoadingIndicator, Reloader: LoadingReloader>: LoadingStateView<Indicator, Reloader> {
     
-    private var action: (()->Void)?
-    
-    required init(_ indicator: LoadingIndicator, _ reloader: LoadingReloader) {
+    required init(_ indicator: Indicator, _ reloader: Reloader) {
         super.init(indicator, reloader)
         setup()
     }
@@ -191,12 +193,6 @@ class LoadingXXXXXView: LoadingView {
         
         addSubview(indicator)
         addSubview(reloader)
-        
-        let tap = UITapGestureRecognizer(
-            target: self,
-            action: #selector(tapAction)
-        )
-        addGestureRecognizer(tap)
     }
     
     override public func layoutSubviews() {
@@ -214,10 +210,6 @@ class LoadingXXXXXView: LoadingView {
             let y = bounds.height * 0.5 + offset.y
             reloader.center = CGPoint(x: x, y: y)
         }
-    }
-    
-    @objc private func tapAction(_ sender: UITapGestureRecognizer) {
-        action?()
     }
     
     public override func start() {
@@ -239,10 +231,6 @@ class LoadingXXXXXView: LoadingView {
         reloader.isHidden = false
         indicator.isHidden = true
         indicator.stop()
-    }
-    
-    public override func action(_ handle: @escaping (()->Void)) {
-        action = handle
     }
 }
 ```
