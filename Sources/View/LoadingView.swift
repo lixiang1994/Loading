@@ -69,4 +69,8 @@ open class LoadingStateView<Indicator: LoadingIndicator, Reloader: LoadingReload
     open func fail() {
         
     }
+    
+    public func set(reloader action: @escaping Action) {
+        reloader.action(action)
+    }
 }

@@ -119,10 +119,13 @@ extension LoadingWrapper where Base: UIButton {
             base.isUserInteractionEnabled = true
         }
         // 移除遮罩视图
-        guard let view = base.viewWithTag(tag) else {
+        guard
+            let maskView = base.viewWithTag(tag),
+            let view = maskView.subviews.first as? UIView & Loadingable else {
             return
         }
-        view.removeFromSuperview()
+        view.stop()
+        maskView.removeFromSuperview()
         
         // 恢复原有内容样式
         guard let temp = temp else {
@@ -144,7 +147,7 @@ extension LoadingWrapper where Base: UIButton {
         self.temp = nil
     }
     
-    public func fail(_ tag: Int = 1994, reload handle: @escaping ()->Void) {
+    public func fail(_ tag: Int = 1994, reload action: Action? = .none) {
         print("UIButton 无 fail 状态")
     }
 }

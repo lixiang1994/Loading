@@ -77,21 +77,21 @@ extension LoadingWrapper where Base: UIView {
         view.start()
     }
     
-    public func fail(_ tag: Int = 1994, reload handle: (()->Void)? = .none) {
-        guard let view = base.viewWithTag(tag) as? LoadingStateView else {
+    public func fail(_ tag: Int = 1994, reload action: Action? = .none) {
+        guard let view = base.viewWithTag(tag) as? UIView & LoadingStateable else {
             return
         }
         
         base.bringSubviewToFront(view)
         
-        if let handle = handle {
-            view.reloader.action(handle)
+        if let action = action {
+            view.set(reloader: action)
         }
         view.fail()
     }
     
     public func stop(_ tag: Int = 1994) {
-        guard let view = base.viewWithTag(tag) as? LoadingStateView else {
+        guard let view = base.viewWithTag(tag) as? UIView & Loadingable else {
             return
         }
         
