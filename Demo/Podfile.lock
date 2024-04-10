@@ -1,5 +1,7 @@
 PODS:
-  - Loading (1.0.4)
+  - Loading (1.2.0):
+    - Loading/Privacy (= 1.2.0)
+  - Loading/Privacy (1.2.0)
   - lottie-ios (3.0.7)
   - SnapKit (5.0.1)
 
@@ -18,10 +20,10 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Loading: 863537e16c8216365a617f85dcaed68140ff9212
+  Loading: c8f16959e29d9d7fa82ef00859480070073a868f
   lottie-ios: c38c3178ae8c4a8f200661aa5f80b9f1ca7f56b3
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
 
-PODFILE CHECKSUM: 0fe4c877718530dc0d885bd909cf46096bfb0972
+PODFILE CHECKSUM: 47406e1163bb7eafb2e01702d58ddc028c0a06fa
 
-COCOAPODS: 1.10.0
+COCOAPODS: 1.15.2
